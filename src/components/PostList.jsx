@@ -8,7 +8,7 @@ function PreviewPost(props){
                 <h2 className="post-title">
                     {props.title}
                 </h2>
-                <h4 className="post-subtitle">
+                <h4 className="post-subtitle" >
                     {props.text}
                 </h4>
             </Link>
@@ -31,15 +31,19 @@ export class PostList extends React.Component{
         fetch("http://201.vozhzhaev.ru/php/getPosts.php")
             .then(response=>response.json())
             .then(result=>{
+
                 this.setState({
-                    posts: result.map(post=><PreviewPost
+                    posts: result.map(post=>{
+                        const parser = new DOMParser();
+                        const html = parser.parseFromString(post.text,'text/html');
+                        return <PreviewPost
                         key={post.id}
                         title={post.title}
-                        text={post.text.slice(0,50)+"..."}
+                        text={html.body.innerText.slice(0,50)+"..."}
                         author={post.author}
                         date_added={post.date_added}
                         id={post.id}
-                    />)
+                    />})
                 })
             })
     }
