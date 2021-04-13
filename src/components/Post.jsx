@@ -12,7 +12,7 @@ export class Post extends React.Component{
     componentDidMount() {
         const formData = new FormData();
         formData.append('id',this.props.match.params.id);
-        fetch("http://201.vozhzhaev.ru/php/getPost.php",{
+        fetch("http://201.vozhzhaev.ru/getPost",{
             method: "POST",
             body: formData
         }).then(response=>response.json())

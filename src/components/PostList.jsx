@@ -28,7 +28,7 @@ export class PostList extends React.Component{
     }
     componentDidMount() {
         this.props.changeH1("Главная страница");
-        fetch("http://201.vozhzhaev.ru/php/getPosts.php")
+        fetch("http://201.vozhzhaev.ru/getPosts")
             .then(response=>response.json())
             .then(result=>{
 
