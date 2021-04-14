@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {host} from "../config";
 
 function PreviewPost(props){
     return (
@@ -28,7 +29,7 @@ export class PostList extends React.Component{
     }
     componentDidMount() {
         this.props.changeH1("Главная страница");
-        fetch("http://201.vozhzhaev.ru/getPosts")
+        fetch(host+"/getPosts")
             .then(response=>response.json())
             .then(result=>{
 

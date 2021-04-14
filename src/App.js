@@ -10,6 +10,8 @@ import {Contact} from "./components/Contact";
 import {Post} from "./components/Post";
 import {AddPost} from "./admin/AddPost";
 import {Admin} from "./admin/Admin";
+import {Auth} from "./admin/Auth";
+import {Cabinet} from "./components/Cabinet";
 
 class App extends React.Component{
     constructor() {
@@ -34,6 +36,8 @@ class App extends React.Component{
             <Route path="/about" render={()=><About changeH1={this.changeH1}/>}/>
             <Route path="/contact" render={()=><Contact changeH1={this.changeH1}/>}/>
             <Route path="/post/:id" render={(props)=><Post changeH1={this.changeH1} {...props} />}/>
+            <Route path="/auth" render={()=><Auth/>}/>
+            <Route path="/cabinet" render={()=><Cabinet/>}/>
             <hr/>
             <Footer/>
           </BrowserRouter>

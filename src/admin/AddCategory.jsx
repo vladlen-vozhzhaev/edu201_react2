@@ -1,4 +1,5 @@
 import React from "react";
+import {host} from "../config";
 
 export class AddCategory extends React.Component{
     constructor(props) {
@@ -20,7 +21,7 @@ export class AddCategory extends React.Component{
         e.preventDefault();
         const formData = new FormData();
         formData.append('category',this.state.category);
-        fetch('http://201.vozhzhaev.ru/addCategory',{
+        fetch(host+'/addCategory',{
             method: "POST",
             body: formData
         })

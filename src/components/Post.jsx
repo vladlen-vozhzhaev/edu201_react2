@@ -1,4 +1,5 @@
 import React from 'react';
+import {host} from "../config";
 
 export class Post extends React.Component{
     constructor(props) {
@@ -12,7 +13,7 @@ export class Post extends React.Component{
     componentDidMount() {
         const formData = new FormData();
         formData.append('id',this.props.match.params.id);
-        fetch("http://201.vozhzhaev.ru/getPost",{
+        fetch(host+"/getPost",{
             method: "POST",
             body: formData
         }).then(response=>response.json())

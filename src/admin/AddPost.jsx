@@ -1,6 +1,7 @@
 import React from 'react';
 import SunEditor from "suneditor-react";
-import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
+import 'suneditor/dist/css/suneditor.min.css';
+import {host} from "../config"; // Import Sun Editor's CSS File
 
 class AddCategoryInput extends React.Component{
     constructor(props) {
@@ -47,7 +48,7 @@ export class AddPost extends React.Component{
     componentDidMount() {
         this.props.changeH1("Добавление статьи");
 
-        fetch("http://201.vozhzhaev.ru/getCategory")
+        fetch(host+"/getCategory")
             .then(response=>response.json())
             .then(result=>{
                 this.setState({
@@ -76,7 +77,7 @@ export class AddPost extends React.Component{
         formData.append("author",this.state.author);
         formData.append('category',this.state.category);
         formData.append('newCategory',this.state.newCategory);
-        fetch("http://201.vozhzhaev.ru/addPost",{
+        fetch(host+"/addPost",{
             method: "POST",
             body: formData
         }).then(response=>response.json())
