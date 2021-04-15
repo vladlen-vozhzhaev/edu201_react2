@@ -1,12 +1,14 @@
 import React from 'react';
 import {host} from "../config";
+import {Redirect} from 'react-router-dom'
 
 export class Auth extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             email: "",
-            pass: ""
+            pass: "",
+            redirect: false
         }
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit= this.handleSubmit.bind(this);
@@ -29,25 +31,35 @@ export class Auth extends React.Component{
             body: formData
         })
             .then(response=>response.json())
-            .then(result=>console.log(result));
+            .then(result=>{
+                if(result.result === "success"){
+                    this.setState({
+                        redirect: true
+                    })
+                }
+            });
     }
     render() {
-        return (
-            <div className="container">
-                <div className="col-sm-5 mx-auto">
-                    <form onSubmit={this.handleSubmit}>
-                        <div className="mb-3">
-                            <input value={this.state.email} onChange={this.handleInput} name="email" type="text" className="form-control" placeholder="login"/>
-                        </div>
-                        <div className="mb-3">
-                            <input value={this.state.pass} onChange={this.handleInput} name="pass" type="password" className="form-control" placeholder="pass"/>
-                        </div>
-                        <div className="mb-3 text-center">
-                            <input type="submit" value="Войти" className="btn btn-primary"/>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        )
+        const redirect = this.state.redirect;
+        if(redirect){
+            return <Redirect to="/admin/addPost"/>;
+        }else {
+            return (
+                <div className="container">
+                    <div className="col-sm-5 mx-auto">
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="mb-3">
+                                <input value={this.state.email} onChange={this.handleInput} name="email" type="text" className="form-control" placeholder="login"/>
+                            </div>
+                            <div className="mb-3">
+                                <input value={this.state.pass} onChange={this.handleInput} name="pass" type="password" className="form-control" placeholder="pass"/>
+                            </div>
+                            <div className="mb-3 text-center">
+                                <input type="submit" value="Войти" className="btn btn-primary"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>)
+        }
     }
 }
